@@ -33,7 +33,6 @@ public class BaseTest {
     @BeforeMethod(alwaysRun = true)
     @Parameters(value="BrowserName")
     public void setupDriver (String browserName) {
-        driver = BrowserFactory.getDriver();
         driver.manage().window().maximize();
         driver.get(Constants.url);
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
