@@ -32,4 +32,4 @@ jobs:
 
       # Step 4: Build and run the tests using Maven
       - name: Run tests with Maven
-        run: mvn clean test -DsuiteXmlFile=src/test/resources/testng.xml
+        run: mvn clean test
