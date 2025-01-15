@@ -20,7 +20,7 @@ jobs:
         uses: actions/setup-java@v2
         with:
           java-version: '21'
-          distribution: 'adopt'
+          distribution: 'temurin'
 
       - name: Cache Maven dependencies
         uses: actions/cache@v2
@@ -30,6 +30,14 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-maven-
 
-      # Step 4: Build and run the tests using Maven
-      - name: Run tests with Maven
-        run: mvn clean test
+      - name: List compiled classes
+        run: ls -R target/test-classes
+
+      - name: Run Maven tests with debug
+        run: mvn clean test -X
+
+      - name: Upload Surefire reports
+        uses: actions/upload-artifact@v3
+        with:
+          name: surefire-reports
+          path: target/surefire-reports/
