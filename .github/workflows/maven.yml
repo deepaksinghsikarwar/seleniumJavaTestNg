@@ -30,9 +30,6 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-maven-
 
-      - name: List compiled classes
-        run: ls -R target/test-classes
-
       - name: Run Maven tests with debug
         run: mvn clean test -X
 
