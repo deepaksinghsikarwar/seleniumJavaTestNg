@@ -41,12 +41,18 @@ public class BrowserFactory {
                 WebDriverManager.chromedriver().setup();
                 ChromeOptions chromeOptions = new ChromeOptions();
 
-                // Generate a unique user-data-dir for Chrome
-                String userDataDir = "/tmp/selenium_user_data_" + System.currentTimeMillis();
-                chromeOptions.addArguments("--user-data-dir=" + userDataDir);
-                chromeOptions.addArguments("--headless");  // Optional: Run headless if needed for CI
-                chromeOptions.addArguments("--no-sandbox");
-                chromeOptions.addArguments("--disable-dev-shm-usage");
+                // Check if running in CI environment
+                String runEnv = System.getProperty("runEnv", System.getenv("RUN_ENV"));
+                boolean isRemote = "ci".equalsIgnoreCase(runEnv);
+
+                if (isRemote) {
+                    // Apply only in non-local (remote) environments
+                    String userDataDir = "/tmp/selenium_user_data_" + System.currentTimeMillis();
+                    chromeOptions.addArguments("--user-data-dir=" + userDataDir);
+                    chromeOptions.addArguments("--headless");
+                    chromeOptions.addArguments("--no-sandbox");
+                    chromeOptions.addArguments("--disable-dev-shm-usage");
+                }
 
                 // Create and return Chrome driver with options
                 newDriver = new ChromeDriver(chromeOptions);
