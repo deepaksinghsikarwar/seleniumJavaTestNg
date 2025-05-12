@@ -1,7 +1,9 @@
 package common;
 
+import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import common.interfaces.IBrowser;
@@ -36,7 +38,18 @@ public class BrowserFactory {
         WebDriver newDriver;
         switch (browserType.toLowerCase()) {
             case "chrome":
-                newDriver = new ChromeBrowser().createDriver();
+                WebDriverManager.chromedriver().setup();
+                ChromeOptions chromeOptions = new ChromeOptions();
+
+                // Generate a unique user-data-dir for Chrome
+                String userDataDir = "/tmp/selenium_user_data_" + System.currentTimeMillis();
+                chromeOptions.addArguments("--user-data-dir=" + userDataDir);
+                chromeOptions.addArguments("--headless");  // Optional: Run headless if needed for CI
+                chromeOptions.addArguments("--no-sandbox");
+                chromeOptions.addArguments("--disable-dev-shm-usage");
+
+                // Create and return Chrome driver with options
+                newDriver = new ChromeDriver(chromeOptions);
                 break;
             case "firefox":
                 newDriver = new FirefoxBrowser().createDriver();

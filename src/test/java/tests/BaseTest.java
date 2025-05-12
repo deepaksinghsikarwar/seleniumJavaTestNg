@@ -3,7 +3,6 @@ package tests;
 import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.reporter.ExtentSparkReporter;
 import common.BrowserFactory;
-import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.WebDriver;
 import org.testng.annotations.*;
 import testdata.Constants;
@@ -22,7 +21,6 @@ public class BaseTest {
         ExtentSparkReporter htmlReporter = new ExtentSparkReporter("reports/extent-report_"+ ScreenshotUtils.formattedDateTime()+".html");
         extent = new ExtentReports();
         extent.attachReporter(htmlReporter);
-        WebDriverManager.chromedriver().setup();
     }
 
     @AfterSuite(alwaysRun = true)
