@@ -1,6 +1,6 @@
 package testdata;
 
 public interface Constants {
-    String url = "https://www.google.com";
+    String url = "https://www.amazon.in";
 
 }

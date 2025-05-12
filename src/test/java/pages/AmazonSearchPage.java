@@ -6,23 +6,23 @@ import org.openqa.selenium.support.FindBy;
 
 import java.util.List;
 
-public class GoogleSearchPage extends BasePage {
+public class AmazonSearchPage extends BasePage {
 
     // Page Elements
-    @FindBy(name = "q") // Locator for the search input field
+    @FindBy(xpath = "//*[contains(@class,'nav-search-field ')]//input") // Locator for the search input field
     private WebElement searchBox;
 
-    @FindBy(name = "btnK") // Locator for the Google Search button
+    @FindBy(xpath = "//*[contains(@id,'nav-search-submit-button')]") // Locator for the Google Search button
     private WebElement searchButton;
 
     @FindBy(id = "result-stats") // Locator for the search results stats (optional)
     private WebElement resultsStats;
 
-    @FindBy(css = "h3") // Locator for search result titles
+    @FindBy(xpath = "//*[@data-component-type='s-result-info-bar']") // Locator for search result titles
     private List<WebElement> searchResults;
 
     // Constructor
-    public GoogleSearchPage(WebDriver driver) {
+    public AmazonSearchPage(WebDriver driver) {
         super(driver);
     }
 

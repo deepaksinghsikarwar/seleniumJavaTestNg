@@ -1,21 +1,20 @@
 package tests;
 
 import common.BrowserFactory;
-import io.github.bonigarcia.wdm.WebDriverManager;
 import org.testng.annotations.Test;
-import pages.GoogleSearchPage;
+import pages.AmazonSearchPage;
 
 public class TestCases1 extends BaseTest {
 
-    GoogleSearchPage page;
+    AmazonSearchPage page;
 
     public TestCases1(){
         driver = BrowserFactory.getDriver();
-        page = new GoogleSearchPage(driver);
+        page = new AmazonSearchPage(driver);
     }
 
     @Test
-    public void googleSearch(){
+    public void amazonSearch(){
         page.enterSearchQuery("searchTerm");
         page.submitSearchButton();
         page.clickSearchButton();
